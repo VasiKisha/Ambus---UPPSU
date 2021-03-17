@@ -35,6 +35,9 @@ AMBUS::AMBUS(String myAddress, int setDirectionPin)
     crc.reserve(CRC_SIZE);
 
     directionPin = setDirectionPin;
+    pinMode(directionPin, OUTPUT);
+    digitalWrite(directionPin, LOW);
+
     deviceAddress = myAddress;
     broadcast = "AMBUS";
     dataPacket = "";
