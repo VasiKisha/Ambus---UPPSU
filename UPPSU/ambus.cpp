@@ -16,8 +16,6 @@
 
 //#define AMBUS_DEBUG
 
-#define MASTER_ADDRESS "MASTER"
-
 //PACKET DEFINITIONS
 #define START_OF_PACKET '$'
 #define SEPARATOR       ';'
@@ -28,7 +26,7 @@
 #define CRC_SIZE        1
 #define PACKET_SIZE     ADDRESS_SIZE + COMMAND_SIZE + DATA_SIZE + CRC_SIZE + 5
 
-AMBUS::AMBUS(String myAddress)
+AMBUS::AMBUS(String myAddress, int setDirectionPin)
 {
     dataPacket.reserve(PACKET_SIZE);
     address.reserve(ADDRESS_SIZE);
@@ -36,7 +34,9 @@ AMBUS::AMBUS(String myAddress)
     data.reserve(DATA_SIZE);
     crc.reserve(CRC_SIZE);
 
+    directionPin = setDirectionPin;
     deviceAddress = myAddress;
+    broadcast = "AMBUS";
     dataPacket = "";
     address = "";
     command = "";
@@ -45,6 +45,27 @@ AMBUS::AMBUS(String myAddress)
 
     receiving = false;
     dataReady = false;
+}
+
+bool AMBUS::changeAddress(String myAddress)
+{
+    if (myAddress.length() > 0 && myAddress.length() <= ADDRESS_SIZE)
+    {
+        for (int i = 0; i < myAddress.length(); i++)
+        {
+            if (myAddress[i] == START_OF_PACKET) return false;
+            if (myAddress[i] == SEPARATOR) return false;
+            if (myAddress[i] == END_OF_PACKET) return false;
+        }
+        deviceAddress = myAddress;
+        return true;
+    }
+    else return false;
+}
+
+String AMBUS::myAddress()
+{
+    return deviceAddress;
 }
 
 void AMBUS::serialEventHandler()
@@ -100,7 +121,30 @@ void AMBUS::serialEventHandler()
                 receiving = false;
                 return;
             }
-            if (address != deviceAddress)    //address check
+            else if (address == broadcast)
+            {
+                if (command == "ADDRESS?")
+                {
+                    acknowledge(deviceAddress);
+                    address = "";
+                    command = "";
+                    data = "";
+                    crc = "";
+                    receiving = false;
+                    return;
+                }
+                else if (command == "ADDRESS")
+                {
+                    if (changeAddress(data)) acknowledge(deviceAddress);
+                    address = "";
+                    command = "";
+                    data = "";
+                    crc = "";
+                    receiving = false;
+                    return;
+                }
+            }
+            else if (address != deviceAddress)    //address check
             {
 #ifdef AMBUS_DEBUG
                 Serial.println("ADDRESS NOT MATCH: ");
@@ -115,6 +159,7 @@ void AMBUS::serialEventHandler()
                 receiving = false;
                 return;
             }
+
             dataReady = true;    //message is correct and ready to pickup
             receiving = false;
         }
@@ -151,7 +196,7 @@ void AMBUS::notacknowledge()
 void AMBUS::acknowledge(String answer)
 {
     dataPacket = START_OF_PACKET;
-    dataPacket += MASTER_ADDRESS;
+    dataPacket += deviceAddress;
     dataPacket += SEPARATOR;
     dataPacket += command;
     dataPacket += SEPARATOR;
@@ -160,10 +205,10 @@ void AMBUS::acknowledge(String answer)
     dataPacket += checksum(dataPacket, dataPacket.length());
     dataPacket += END_OF_PACKET;
     //delay(4); // na RX vysí po skonèení pøijmu nìjak moc dlouho HIGH...
-    digitalWrite(DIRECTIONPIN, HIGH);;
+    digitalWrite(directionPin, HIGH);;
     Serial.print(dataPacket);
     Serial.flush();
-    digitalWrite(DIRECTIONPIN, LOW);
+    digitalWrite(directionPin, LOW);
     address = "";
     command = "";
     data = "";

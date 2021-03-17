@@ -24,8 +24,8 @@
 //CALVO(?)
 //CALIG(?)
 //CALIO(?)
-//CALS
-//CALR
+//SAVE
+//LOAD
 
 #include "ambus.h"
 #include "EEPROM.h"
@@ -67,12 +67,13 @@ struct Timer
     int t300;
 };
 
-struct Calibration
+struct Settings
 {
     float vGain;
     int vOffset;
     float iGain;
     int iOffset;
+    char myAddress[8];
 };
 
 struct Uppsu
@@ -80,12 +81,12 @@ struct Uppsu
     Set set;
     Read read;
     Timer timer;
-    Calibration calibration;
+    Settings settings;
 }uppsu;
 
 unsigned long previousMillis = 0;
 
-AMBUS ambus("UPPSU");
+AMBUS ambus("UPPSU", 5);
 
 void setup()
 {
@@ -96,16 +97,12 @@ void setup()
     pinMode(CCREF, OUTPUT);
     analogReference(DEFAULT);
     
-    //uppsu.calibration.iGain = 1.0;
-    //uppsu.calibration.iOffset = 0.0;
-    //uppsu.calibration.vGain = 1.0;
-    //uppsu.calibration.vOffset = 0.0;
-    EEPROM.get(0, uppsu.calibration);
+    EEPROM.get(0, uppsu.settings);
+    if (uppsu.settings.myAddress[0] != '\xff') ambus.changeAddress(uppsu.settings.myAddress);
     uppsu.read.switchRem = true;
     Measure();
 
     Serial.begin(115200);
-
     uppsu.timer.t10 = 10;
     uppsu.timer.t1000 = 1000;
     uppsu.timer.t300 = 300;
@@ -128,35 +125,7 @@ void loop()
 
         if (!uppsu.timer.t1000--)
         {
-            //timer.t1000 = 1000;
-            //if (telemetry.switchState)
-            //{
-            //    Serial.write("Switch ON, LED ON, CVREF 1/4, CCREF 1/4, ");
-            //    control.led = true;
-            //    control.cvRef = 64;
-            //    control.ccRef = 64;
-            //}
-            //else
-            //{
-            //    Serial.write("Switch OFF, LED OFF, CVREF 0, CCREF 0, ");
-            //    control.led = false;
-            //    control.cvRef = 0;
-            //    control.ccRef = 0;
-            //}
-            //if (telemetry.ccMode)
-            //{
-            //    Serial.write("CC MODE, ");
-            //}
-            //else
-            //{
-            //    Serial.write("CV MODE, ");
-            //}
-            //Serial.write("Voltage ");
-            //Serial.print(telemetry.voltage, HEX);
-            //Serial.write(", ");
-            //Serial.write("Current ");
-            //Serial.print(telemetry.current, HEX);
-            //Serial.write("\n");
+
         }       
     }
 
@@ -247,52 +216,54 @@ void loop()
         else if (ambus.getCommand() == "CALVG")
         {
             String temp = ambus.getData();
-            uppsu.calibration.vGain = temp.toFloat();
-            ambus.acknowledge(String(uppsu.calibration.vGain, 2));
+            uppsu.settings.vGain = temp.toFloat();
+            ambus.acknowledge(String(uppsu.settings.vGain, 2));
         }
         else if (ambus.getCommand() == "CALVG?")
         {
-            ambus.acknowledge(String(uppsu.calibration.vGain, 2));
+            ambus.acknowledge(String(uppsu.settings.vGain, 2));
         }
         else if (ambus.getCommand() == "CALVO")
         {
             String temp = ambus.getData();
-            uppsu.calibration.vOffset = temp.toInt();
-            ambus.acknowledge(String(uppsu.calibration.vOffset));
+            uppsu.settings.vOffset = temp.toInt();
+            ambus.acknowledge(String(uppsu.settings.vOffset));
         }
         else if (ambus.getCommand() == "CALVO?")
         {
-            ambus.acknowledge(String(uppsu.calibration.vOffset));
+            ambus.acknowledge(String(uppsu.settings.vOffset));
         }
         else if (ambus.getCommand() == "CALIG")
         {
             String temp = ambus.getData();
-            uppsu.calibration.iGain = temp.toFloat();
-            ambus.acknowledge(String(uppsu.calibration.iGain, 2));
+            uppsu.settings.iGain = temp.toFloat();
+            ambus.acknowledge(String(uppsu.settings.iGain, 2));
         }
         else if (ambus.getCommand() == "CALIG?")
         {
-            ambus.acknowledge(String(uppsu.calibration.iGain, 2));
+            ambus.acknowledge(String(uppsu.settings.iGain, 2));
         }
         else if (ambus.getCommand() == "CALIO")
         {
             String temp = ambus.getData();
-            uppsu.calibration.iOffset = temp.toInt();
-            ambus.acknowledge(String(uppsu.calibration.iOffset));
+            uppsu.settings.iOffset = temp.toInt();
+            ambus.acknowledge(String(uppsu.settings.iOffset));
         }
         else if (ambus.getCommand() == "CALIO?")
         {
-            ambus.acknowledge(String(uppsu.calibration.iOffset));
+            ambus.acknowledge(String(uppsu.settings.iOffset));
         }
-        else if (ambus.getCommand() == "CALS")
+        else if (ambus.getCommand() == "SAVE")
         {
-            EEPROM.put(0, uppsu.calibration);
-            ambus.acknowledge("CALSaved");
+            strcpy(uppsu.settings.myAddress, ambus.myAddress().c_str());
+            EEPROM.put(0, uppsu.settings);
+            ambus.acknowledge("EEPROM Saved");
         }
-        else if (ambus.getCommand() == "CALR")
+        else if (ambus.getCommand() == "LOAD")
         {
-            EEPROM.get(0, uppsu.calibration);
-            ambus.acknowledge("CALRestored");
+            EEPROM.get(0, uppsu.settings);
+            ambus.changeAddress(uppsu.settings.myAddress);
+            ambus.acknowledge("EEPROM Loaded");
         }
     }
 }
@@ -318,15 +289,13 @@ void Control()
         uppsu.set.led = false;
     }
 
-    //if(uppsu.set.output) digitalWrite(,HIGH);
-    //else digitalwrite(,LOW);
     if (uppsu.set.led) digitalWrite(LED, HIGH);
     else digitalWrite(LED, LOW);
 
-    int calValue = uppsu.calibration.vOffset + (int)(uppsu.set.cvRef * uppsu.calibration.vGain);
+    int calValue = uppsu.settings.vOffset + (int)(uppsu.set.cvRef * uppsu.settings.vGain);
     if (calValue > 255) calValue = 255;
     analogWrite(CVREF, calValue );
-    calValue = uppsu.calibration.iOffset + (int)(uppsu.set.ccRef * uppsu.calibration.iGain);
+    calValue = uppsu.settings.iOffset + (int)(uppsu.set.ccRef * uppsu.settings.iGain);
     if (calValue > 255) calValue = 255;
     analogWrite(CCREF, calValue);
 }
