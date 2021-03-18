@@ -1323,4 +1323,15 @@ Wire Wire Line
 Connection ~ 8200 4500
 Wire Wire Line
 	8200 4500 8850 4500
+$Comp
+L Diode:1.5KExxA D?
+U 1 1 60543B6D
+P 3650 7400
+F 0 "D?" H 3650 7617 50  0000 C CNN
+F 1 "1.5KExxA" H 3650 7526 50  0000 C CNN
+F 2 "Diode_THT:D_DO-201AE_P15.24mm_Horizontal" H 3650 7200 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/88301/15ke.pdf" H 3600 7400 50  0001 C CNN
+	1    3650 7400
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
