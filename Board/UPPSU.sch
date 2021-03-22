@@ -1252,7 +1252,7 @@ Connection ~ 5100 4500
 Wire Wire Line
 	4800 4500 5100 4500
 Wire Wire Line
-	5100 4500 7900 4500
+	5100 4500 7250 4500
 $Comp
 L Connector_Generic:Conn_01x12 J4
 U 1 1 6029C434
@@ -1342,4 +1342,13 @@ Wire Wire Line
 	4350 4350 6400 4350
 Wire Wire Line
 	5800 5050 5800 4250
+Wire Wire Line
+	6600 6100 6600 6250
+Wire Wire Line
+	6600 6250 7250 6250
+Wire Wire Line
+	7250 6250 7250 4500
+Connection ~ 7250 4500
+Wire Wire Line
+	7250 4500 7900 4500
 $EndSCHEMATC
