@@ -539,10 +539,8 @@ F 3 "~" H 9950 5700 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	9950 5850 9950 6050
-Connection ~ 9950 6050
 Wire Wire Line
 	9950 5550 9950 4650
-Connection ~ 9950 4650
 $Comp
 L Device:CP C1
 U 1 1 60070BA1
@@ -1001,10 +999,6 @@ Connection ~ 9700 2200
 Wire Wire Line
 	9700 2200 9800 2200
 Wire Wire Line
-	9950 4650 10300 4650
-Wire Wire Line
-	9950 6050 10300 6050
-Wire Wire Line
 	1100 1950 1100 1850
 Wire Wire Line
 	1100 1750 1100 1850
@@ -1024,28 +1018,14 @@ $EndComp
 $Comp
 L Connector:Conn_01x04_Male J7
 U 1 1 603AA54F
-P 10900 5250
-F 0 "J7" H 11008 5531 50  0000 C CNN
-F 1 "Conn_01x04_Male" H 11008 5440 50  0000 C CNN
-F 2 "Connector_Phoenix_MSTB:PhoenixContact_MSTBVA_2,5_4-G-5,08_1x04_P5.08mm_Vertical" H 10900 5250 50  0001 C CNN
-F 3 "~" H 10900 5250 50  0001 C CNN
-	1    10900 5250
+P 10500 5150
+F 0 "J7" H 10608 5431 50  0000 C CNN
+F 1 "Conn_01x04_Male" H 10608 5340 50  0000 C CNN
+F 2 "Connector_Phoenix_MSTB:PhoenixContact_MSTBVA_2,5_4-G-5,08_1x04_P5.08mm_Vertical" H 10500 5150 50  0001 C CNN
+F 3 "~" H 10500 5150 50  0001 C CNN
+	1    10500 5150
 	-1   0    0    -1  
 $EndComp
-Wire Wire Line
-	10700 5150 9650 5150
-Wire Wire Line
-	10700 5250 9650 5250
-Wire Wire Line
-	9650 5250 9650 5350
-Wire Wire Line
-	10700 5450 10300 5450
-Wire Wire Line
-	10300 5450 10300 6050
-Wire Wire Line
-	10700 5350 10300 5350
-Wire Wire Line
-	10300 5350 10300 4650
 $Comp
 L Connector_Generic:Conn_01x12 J5
 U 1 1 602C7A28
@@ -1351,4 +1331,53 @@ Wire Wire Line
 Connection ~ 7250 4500
 Wire Wire Line
 	7250 4500 7900 4500
+Wire Wire Line
+	9950 6050 10300 6050
+Wire Wire Line
+	10300 6050 10300 5350
+Connection ~ 9950 6050
+Wire Wire Line
+	9950 4650 10300 4650
+Wire Wire Line
+	10300 4650 10300 5050
+Connection ~ 9950 4650
+Wire Wire Line
+	9650 5150 9700 5150
+Wire Wire Line
+	9700 5150 9700 5250
+Wire Wire Line
+	9700 5250 10300 5250
+Wire Wire Line
+	9650 5350 9850 5350
+Wire Wire Line
+	9850 5350 9850 5150
+Wire Wire Line
+	9850 5150 10300 5150
+$Comp
+L Connector_Generic:Conn_01x04 J8
+U 1 1 605FB7AE
+P 10950 5150
+F 0 "J8" V 10822 5330 50  0000 L CNN
+F 1 "Conn_01x04" V 10913 5330 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 10950 5150 50  0001 C CNN
+F 3 "~" H 10950 5150 50  0001 C CNN
+	1    10950 5150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10750 5050 10750 4650
+Wire Wire Line
+	10750 4650 10300 4650
+Connection ~ 10300 4650
+Wire Wire Line
+	10300 6050 10750 6050
+Wire Wire Line
+	10750 6050 10750 5350
+Connection ~ 10300 6050
+Wire Wire Line
+	10750 5150 10300 5150
+Connection ~ 10300 5150
+Wire Wire Line
+	10750 5250 10300 5250
+Connection ~ 10300 5250
 $EndSCHEMATC
