@@ -88,10 +88,10 @@ F 3 "" H 1800 2300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Notes Line
-	5650 5800 7050 5800
+	5650 6100 7050 6100
 Wire Notes Line
-	7050 4750 5650 4750
-Text Notes 6000 5300 0    50   ~ 0
+	7050 5050 5650 5050
+Text Notes 6000 5600 0    50   ~ 0
 Arduino Pro Mini
 $Comp
 L Amplifier_Operational:LM324 U2
@@ -308,9 +308,9 @@ Connection ~ 3900 4050
 Wire Wire Line
 	4350 4050 4350 4350
 Wire Notes Line
-	7050 4750 7050 5800
+	7050 5050 7050 6100
 Wire Notes Line
-	5650 4750 5650 5800
+	5650 5050 5650 6100
 Wire Wire Line
 	3900 2600 3900 2900
 Wire Wire Line
@@ -398,7 +398,6 @@ Wire Wire Line
 	6750 3200 6300 3200
 Wire Wire Line
 	6300 3200 6300 3700
-Connection ~ 6300 3700
 Wire Wire Line
 	7050 3200 7250 3200
 Wire Wire Line
@@ -575,7 +574,7 @@ Wire Wire Line
 Text Notes 8650 1050 0    50   ~ 0
 Voutmax = 18V
 Wire Wire Line
-	7650 2800 6200 2800
+	7650 2800 7500 2800
 $Comp
 L Relay:FINDER-30.22 K1
 U 1 1 5FFD4DA9
@@ -802,33 +801,18 @@ Wire Wire Line
 	2500 5250 2150 5250
 Connection ~ 2500 5250
 Wire Wire Line
-	6200 2800 6200 4750
-Wire Wire Line
-	6300 3700 6300 4750
-Wire Wire Line
-	5900 4750 5900 4250
-Wire Wire Line
-	5900 4250 4450 4250
-Wire Wire Line
 	4450 4250 4450 2700
-Wire Wire Line
-	5800 4750 5800 4350
-Wire Wire Line
-	5800 4350 4350 4350
 $Comp
 L power:GND #PWR018
 U 1 1 6031EC81
-P 6800 4750
-F 0 "#PWR018" H 6800 4500 50  0001 C CNN
-F 1 "GND" H 6805 4577 50  0000 C CNN
-F 2 "" H 6800 4750 50  0001 C CNN
-F 3 "" H 6800 4750 50  0001 C CNN
-	1    6800 4750
+P 6600 5050
+F 0 "#PWR018" H 6600 4800 50  0001 C CNN
+F 1 "GND" H 6605 4877 50  0000 C CNN
+F 2 "" H 6600 5050 50  0001 C CNN
+F 3 "" H 6600 5050 50  0001 C CNN
+	1    6600 5050
 	-1   0    0    1   
 $EndComp
-Wire Wire Line
-	6600 4750 6600 4500
-Connection ~ 6600 4500
 Text Label 3450 5250 0    50   ~ 0
 +5V
 Wire Wire Line
@@ -841,31 +825,18 @@ Wire Wire Line
 $Comp
 L Device:R R10
 U 1 1 5FF83BEB
-P 5350 5450
-F 0 "R10" V 5143 5450 50  0000 C CNN
-F 1 "1k" V 5234 5450 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 5280 5450 50  0001 C CNN
-F 3 "~" H 5350 5450 50  0001 C CNN
-	1    5350 5450
+P 5100 5450
+F 0 "R10" V 4893 5450 50  0000 C CNN
+F 1 "1k" V 4984 5450 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 5030 5450 50  0001 C CNN
+F 3 "~" H 5100 5450 50  0001 C CNN
+	1    5100 5450
 	1    0    0    -1  
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x12 J4
-U 1 1 6029C434
-P 6300 4950
-F 0 "J4" V 6425 4896 50  0000 C CNN
-F 1 "ARDUINO" V 6516 4896 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_1x12_P2.54mm_Vertical" H 6300 4950 50  0001 C CNN
-F 3 "~" H 6300 4950 50  0001 C CNN
-	1    6300 4950
-	0    -1   1    0   
 $EndComp
 Wire Wire Line
 	3800 1950 7350 1950
 Wire Wire Line
 	4650 1250 4650 1550
-Wire Wire Line
-	6600 4500 7900 4500
 Wire Wire Line
 	9250 4650 9950 4650
 Wire Wire Line
@@ -1078,132 +1049,95 @@ Wire Wire Line
 $Comp
 L Connector_Generic:Conn_01x12 J5
 U 1 1 602C7A28
-P 6400 5600
-F 0 "J5" V 6525 5546 50  0000 C CNN
-F 1 "ARDUINO" V 6616 5546 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_1x12_P2.54mm_Vertical" H 6400 5600 50  0001 C CNN
-F 3 "~" H 6400 5600 50  0001 C CNN
-	1    6400 5600
-	0    1    -1   0   
+P 6400 5250
+F 0 "J5" V 6525 5196 50  0000 C CNN
+F 1 "ARDUINO" V 6616 5196 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x12_P2.54mm_Vertical" H 6400 5250 50  0001 C CNN
+F 3 "~" H 6400 5250 50  0001 C CNN
+	1    6400 5250
+	0    1    1    0   
 $EndComp
-Text Notes 5750 5100 0    50   ~ 0
+Text Notes 5750 5850 0    50   ~ 0
 10
-Text Notes 6800 5100 0    50   ~ 0
+Text Notes 6850 5850 0    50   ~ 0
 RAW
-Text Notes 6850 5500 0    50   ~ 0
+Text Notes 6850 5400 0    50   ~ 0
 TXD
-Text Notes 5750 5500 0    50   ~ 0
+Text Notes 5750 5400 0    50   ~ 0
 9
 Wire Wire Line
-	6900 5900 8000 5900
-Wire Wire Line
-	8000 5900 8000 5350
-Wire Wire Line
 	8000 5350 8450 5350
-Wire Wire Line
-	6800 6000 8100 6000
-Wire Wire Line
-	8100 6000 8100 5550
-Wire Wire Line
-	8100 5550 8450 5550
-Wire Wire Line
-	6500 6100 7900 6100
-Wire Wire Line
-	7900 6100 7900 5650
-Connection ~ 7900 5650
-Wire Wire Line
-	6400 6200 8200 6200
-Wire Wire Line
-	8200 6200 8200 5850
-Wire Wire Line
-	8200 5850 8450 5850
 Wire Wire Line
 	7800 3750 8250 3750
 Wire Wire Line
 	7800 3750 7800 4350
 Wire Wire Line
-	4550 4500 5050 4500
+	4550 4500 4800 4500
 Wire Wire Line
-	5350 5300 5350 4500
-Connection ~ 5350 4500
-Wire Wire Line
-	5350 4500 6600 4500
+	5100 5300 5100 4500
 $Comp
 L Device:R R9
 U 1 1 603567E9
-P 5050 5450
-F 0 "R9" V 4843 5450 50  0000 C CNN
-F 1 "470R" V 4934 5450 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 4980 5450 50  0001 C CNN
-F 3 "~" H 5050 5450 50  0001 C CNN
-	1    5050 5450
+P 4800 5450
+F 0 "R9" V 4593 5450 50  0000 C CNN
+F 1 "470R" V 4684 5450 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 4730 5450 50  0001 C CNN
+F 3 "~" H 4800 5450 50  0001 C CNN
+	1    4800 5450
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5050 5300 5050 4500
-Connection ~ 5050 4500
-Wire Wire Line
-	5050 4500 5350 4500
+	4800 5300 4800 4500
 $Comp
 L Connector_Generic:Conn_01x04 J3
 U 1 1 60361F74
-P 5250 6350
-F 0 "J3" V 5122 6530 50  0000 L CNN
-F 1 "Conn_01x04" V 5213 6530 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 5250 6350 50  0001 C CNN
-F 3 "~" H 5250 6350 50  0001 C CNN
-	1    5250 6350
+P 5000 6350
+F 0 "J3" V 4872 6530 50  0000 L CNN
+F 1 "Conn_01x04" V 4963 6530 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 5000 6350 50  0001 C CNN
+F 3 "~" H 5000 6350 50  0001 C CNN
+	1    5000 6350
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	5350 5600 5350 5900
+	5100 5600 5100 5900
+Connection ~ 5100 5900
 Wire Wire Line
-	5350 5900 5900 5900
-Connection ~ 5350 5900
+	5100 5900 5100 6150
 Wire Wire Line
-	5350 5900 5350 6150
-Wire Wire Line
-	5050 5600 5050 6150
+	4800 5600 4800 6150
 $Comp
 L power:GND #PWR016
 U 1 1 6038D71E
-P 5250 5900
-F 0 "#PWR016" H 5250 5650 50  0001 C CNN
-F 1 "GND" H 5255 5727 50  0000 C CNN
-F 2 "" H 5250 5900 50  0001 C CNN
-F 3 "" H 5250 5900 50  0001 C CNN
-	1    5250 5900
+P 5000 5900
+F 0 "#PWR016" H 5000 5650 50  0001 C CNN
+F 1 "GND" H 5005 5727 50  0000 C CNN
+F 2 "" H 5000 5900 50  0001 C CNN
+F 3 "" H 5000 5900 50  0001 C CNN
+	1    5000 5900
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	5250 5900 5250 6150
-Text Notes 5100 6500 1    50   ~ 0
+	5000 5900 5000 6150
+Text Notes 4850 6500 1    50   ~ 0
 A
-Text Notes 5200 6500 1    50   ~ 0
+Text Notes 4950 6500 1    50   ~ 0
 K
-Text Notes 5400 6550 1    50   ~ 0
+Text Notes 5150 6550 1    50   ~ 0
 SW
-Text Notes 5300 6550 1    50   ~ 0
+Text Notes 5050 6550 1    50   ~ 0
 SW
 $Comp
 L power:GND #PWR017
 U 1 1 603B9873
-P 6600 5800
-F 0 "#PWR017" H 6600 5550 50  0001 C CNN
-F 1 "GND" H 6605 5627 50  0000 C CNN
-F 2 "" H 6600 5800 50  0001 C CNN
-F 3 "" H 6600 5800 50  0001 C CNN
-	1    6600 5800
+P 6800 6100
+F 0 "#PWR017" H 6800 5850 50  0001 C CNN
+F 1 "GND" H 6805 5927 50  0000 C CNN
+F 2 "" H 6800 6100 50  0001 C CNN
+F 3 "" H 6800 6100 50  0001 C CNN
+	1    6800 6100
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	6100 4350 6100 4750
-Wire Wire Line
-	6100 4350 7800 4350
-Wire Wire Line
-	6000 2800 6000 4750
-Wire Wire Line
-	6000 2800 5900 2800
 $Comp
 L Connector_Generic:Conn_01x03 J2
 U 1 1 603C58B3
@@ -1229,16 +1163,6 @@ Wire Wire Line
 Wire Wire Line
 	4550 1250 4550 2400
 Connection ~ 4550 2400
-Wire Wire Line
-	5900 5800 5900 5900
-Wire Wire Line
-	6400 5800 6400 6200
-Wire Wire Line
-	6500 5800 6500 6100
-Wire Wire Line
-	6800 5800 6800 6000
-Wire Wire Line
-	6900 5800 6900 5900
 Connection ~ 8200 4500
 Wire Wire Line
 	8200 4500 8850 4500
@@ -1247,11 +1171,7 @@ Text Label 1400 1550 0    50   ~ 0
 Text Label 2200 5250 0    50   ~ 0
 +24V
 Wire Wire Line
-	5800 5800 5800 6000
-Wire Wire Line
-	5150 6150 5150 6000
-Wire Wire Line
-	5150 6000 5800 6000
+	4900 6150 4900 6000
 $Comp
 L Amplifier_Operational:LM324 U2
 U 4 1 60092950
@@ -1327,5 +1247,99 @@ Wire Wire Line
 	8900 1150 8750 1150
 Wire Wire Line
 	8900 1150 8900 2800
-Connection ~ 10100 1500
+Connection ~ 4800 4500
+Connection ~ 5100 4500
+Wire Wire Line
+	4800 4500 5100 4500
+Wire Wire Line
+	5100 4500 7900 4500
+$Comp
+L Connector_Generic:Conn_01x12 J4
+U 1 1 6029C434
+P 6300 5900
+F 0 "J4" V 6425 5846 50  0000 C CNN
+F 1 "ARDUINO" V 6516 5846 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x12_P2.54mm_Vertical" H 6300 5900 50  0001 C CNN
+F 3 "~" H 6300 5900 50  0001 C CNN
+	1    6300 5900
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	4450 4250 5800 4250
+Wire Wire Line
+	7150 6350 7150 4000
+Wire Wire Line
+	7150 4000 6300 4000
+Wire Wire Line
+	6300 4000 6300 3700
+Connection ~ 6300 3700
+Wire Wire Line
+	6500 6450 7500 6450
+Wire Wire Line
+	7500 6450 7500 2800
+Wire Wire Line
+	6400 6350 6400 6100
+Wire Wire Line
+	6400 6350 7150 6350
+Wire Wire Line
+	6500 6450 6500 6100
+Wire Wire Line
+	8000 5350 8000 4700
+Wire Wire Line
+	8000 4700 6900 4700
+Wire Wire Line
+	6900 4700 6900 5050
+Wire Wire Line
+	7800 5550 7800 4600
+Wire Wire Line
+	7800 4600 6800 4600
+Wire Wire Line
+	6800 4600 6800 5050
+Wire Wire Line
+	7800 5550 8450 5550
+Wire Wire Line
+	7900 4800 7900 5150
+Connection ~ 7900 5150
+Wire Wire Line
+	7650 5850 7650 4750
+Wire Wire Line
+	7650 4750 6300 4750
+Wire Wire Line
+	6300 4750 6300 5050
+Wire Wire Line
+	7650 5850 8450 5850
+Wire Wire Line
+	6200 4800 6200 5050
+Wire Wire Line
+	6200 4800 7900 4800
+Wire Wire Line
+	6500 5050 6500 4350
+Wire Wire Line
+	6500 4350 7800 4350
+Wire Wire Line
+	6100 5050 6100 2800
+Wire Wire Line
+	5900 2800 6100 2800
+Wire Wire Line
+	5550 6000 5550 4900
+Wire Wire Line
+	5550 4900 5900 4900
+Wire Wire Line
+	5900 4900 5900 5050
+Wire Wire Line
+	4900 6000 5550 6000
+Wire Wire Line
+	5450 5900 5450 4850
+Wire Wire Line
+	5450 4850 6000 4850
+Wire Wire Line
+	6000 4850 6000 5050
+Wire Wire Line
+	5100 5900 5450 5900
+Wire Wire Line
+	6400 4350 6400 5050
+Wire Wire Line
+	4350 4350 6400 4350
+Wire Wire Line
+	5800 5050 5800 4250
 $EndSCHEMATC
